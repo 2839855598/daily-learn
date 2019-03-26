@@ -34,7 +34,7 @@
 正好符合上面我们说的特点。
 
 ##### 那生成器是什么？
-   以**function *foo()** {} 或者  **\*function foo(){}**    这种形式就是<b>生成器</b>，函数体里面有 <b>yield</b> 关键字。
+   以**function *foo()** {} 或者  **\*function foo(){}**    这种形式就是<b>生成器</b>，函数体里面有 <b>yield</b> 关键字 或者 **yield\*** 关键字。 在生成器内部，通过**yield**或**yield\***,将当前生成器函数的控制权移交给外部，外部通过调用生成器的 **next** 或者 **throw** 或者 **return**方法将控制权返还给生成器函数。并且能够向其传递数据。
 #####先看个例子：
 ```
    function *foo() {
@@ -66,5 +66,48 @@ yield实际上充当一个**接收**和**返回**的作用
 ```
 
 #####next特点:  
-- 第一次执行，遇到第一个yield停止，返回yield后面的值。
+- 第一次执行，遇到第一个yield停止，返回yield后面的值。如果后面没有，
+返回undefined。
 - 第二次及其后面执行，从上一个yield开始，遇到下一个yield暂停，并返回yield后面的值。
+
+##### yield* 表达式
+用于委托给另一个可迭代对象，包括生成器。
+```
+const function *foo() {
+     yield 4;
+     yield 5;
+}
+const iterator = (function *() {
+    yield 1;
+    yield* [2,3];
+    yield* foo;
+});
+
+console.log(iterator.next()); // { value: 1, done: false } 
+console.log(iterator.next()); // { value: 2, done: false }  
+console.log(iterator.next()); // { value: 3, done: false } 
+console.log(iterator.next()); // { value: 4, done: false } 
+console.log(iterator.next()); // { value: 5, done: false } 
+console.log(iterator.next()); // { value: undefined, done: true }
+```
+##### throw 和 return 终止生成器
+#####throw
+```
+   const iterator = (function *() {
+       yield 1;
+       yield 2;
+       yield 3;
+    })();
+    console.log(iterator.next()); // { value: 1, done: false };
+    iterator.throw(new Error('an error'));
+```
+#####return
+```
+const iterator = (function *() {
+    yield 1;
+    yield 2;
+    yield 3;
+})();
+console.log(iterator.next()); // { value: 1, done: false };
+console.log(iterator.return('hello')); // { value: "hello", done: true }
+```
