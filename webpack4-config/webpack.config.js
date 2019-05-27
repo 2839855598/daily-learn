@@ -1,9 +1,11 @@
 const path = require('path');
+// html文件
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: './src/js/index',
     output: {
         path: path.resolve(__dirname,'dist'),
-        filename: 'myWebpack.js'
+        filename: './js/myWebpack.js'
     },
     module: {
         rules: [
@@ -15,6 +17,7 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    plugins: [new HtmlWebpackPlugin()]
 
 }
