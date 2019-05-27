@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
 <div class="box">this is box</div>
-<script src="./js/index.js"></script>
+<!--不需要手写js，js会被动态编译注入到HTML中-->
+<!--<script src="./js/index.js"></script>-->
 </body>
 </html>

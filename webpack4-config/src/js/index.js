@@ -7,7 +7,7 @@ are();
 
 
 const s1 = new Set();
-
+let  val = '234556';
 let p = new Promise(function(resolve, reject){
     //做一些异步操作
     setTimeout(function(){
