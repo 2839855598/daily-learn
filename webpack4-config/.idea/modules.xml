@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../webpack-demo-js/.idea/webpack-demo-js.iml" filepath="$PROJECT_DIR$/../webpack-demo-js/.idea/webpack-demo-js.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/webpack4-config.iml" filepath="$PROJECT_DIR$/.idea/webpack4-config.iml" />
     </modules>
   </component>
 </project>

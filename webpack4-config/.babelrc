@@ -5,17 +5,9 @@
       {
         "debug": true,
         "targets": ["> 1%", "last 2 versions", "not ie <= 8"],
-        "useBuiltIns": false
+        "useBuiltIns": "usage"
       }  
     ]
 
-  ],
-  "plugins": [
-     [
-        "@babel/plugin-transform-runtime",
-        {
-         "corejs": 3
-        }
-     ]
   ]
 }
