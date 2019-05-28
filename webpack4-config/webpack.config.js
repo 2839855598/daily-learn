@@ -1,6 +1,8 @@
 const path = require('path');
 // html文件
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// 清理旧的dist，生成新的dist
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
     entry: {
       "main": "./src/js/index",
@@ -10,7 +12,7 @@ module.exports = {
         path: path.resolve(__dirname,'dist'),
         // 多个entry，文件名不能写死，会冲突
         // hash与chunkhash区别，chunkhash为chunk唯一性，hash为每次打包统一名字
-        filename: './js/[name]-[hash].js'
+        filename: './js/[name]-[chunkhash:8].js'
     },
     module: {
         rules: [
@@ -56,7 +58,9 @@ module.exports = {
             },
             // 指定页面图标
             favicon: ''
-        })
+        }),
+        // 清除旧的output，生成新的output
+        new CleanWebpackPlugin()
     ]
 
 }
