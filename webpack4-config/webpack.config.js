@@ -20,11 +20,17 @@ module.exports = {
                 use: {
                     loader: 'babel-loader'
                 }
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                // 从右往左顺序解析
+                use: ["style-loader", "css-loader"]
             }
         ]
     },
     plugins: [
-        // 多个 new,多个html文件
+        // 多个 new HtmlWebpackPlugin,多个html文件生成
         // 不需要手写js，js会被动态编译注入到HTML中
         new HtmlWebpackPlugin({
             // 在模板中这个不管用，要在模板title中输入<%= htmlWebpackPlugin.options.title %>
