@@ -1,3 +1,4 @@
+import "../css/main.css";
 
 const a = 22;
 const are = () => {
