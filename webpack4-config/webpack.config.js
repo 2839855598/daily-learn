@@ -1,9 +1,19 @@
 const path = require('path');
+// webpack
+const webpack = require('webpack');
 // html文件
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // 清理旧的dist，生成新的dist
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+// 提取css到单独文件
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// 是否开发模式
+const devMode = process.env.NODE_ENV === 'dev' ;
+
+console.log(devMode)
+
 module.exports = {
+    // production 生产模式，development开发模式
     entry: {
       "main": "./src/js/index",
         "a": "./src/js/a"
@@ -12,7 +22,7 @@ module.exports = {
         path: path.resolve(__dirname,'dist'),
         // 多个entry，文件名不能写死，会冲突
         // hash与chunkhash区别，chunkhash为chunk唯一性，hash为每次打包统一名字
-        filename: './js/[name]-[chunkhash:8].js'
+        filename:  './js/[name]-[chunkhash:8].js'
     },
     module: {
         rules: [
@@ -24,14 +34,29 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                exclude: /node_modules/,
-                // 从右往左顺序解析
-                use: ["style-loader", "css-loader"]
+                test: /\.(c|sa|sc)ss$/,
+                use: [
+                    {
+                      loader:  MiniCssExtractPlugin.loader,
+                      options: {
+                          // publicPath: ,
+
+
+                      }
+                    },
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader'
+                ]
             }
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+            }
+        }),
         // 多个 new HtmlWebpackPlugin,多个html文件生成
         // 不需要手写js，js会被动态编译注入到HTML中
         new HtmlWebpackPlugin({
@@ -41,7 +66,7 @@ module.exports = {
             inject: 'body',
             // 为js，css添加hash，也算是缓存，一旦文件改变了，hash就变，浏览器就重新请求
             // 该文件，如果hash不变，浏览器直接从缓存中获取文件
-            hash: true,
+            hash: devMode ? false : true,
             filename: 'index.html',
             // 模板来源必须写，不写的话，body内容会被清除，只保留js
             template: "./src/demo.html",
@@ -50,17 +75,23 @@ module.exports = {
             // 优化html
             minify: {
                 // 移出HMTL中的注释
-                removeComments: true,
+                removeComments: devMode ? false : true,
                 // 删除空白符和换行符
-                collapseWhitespace: false,
+                collapseWhitespace: devMode ? false : true,
                 // 压缩内联css
-                minifyCSS: true
+                minifyCSS: devMode ? false : true
             },
             // 指定页面图标
             favicon: ''
         }),
         // 清除旧的output，生成新的output
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        // 提取css为单独文件
+        new MiniCssExtractPlugin({
+            // 这里的/指的是 dist输出目录
+            filename:  'css/[name].[hash:8].css'  ,
+            chunkFilename:  'css/[id].[hash:8].css'
+        })
     ]
 
 }

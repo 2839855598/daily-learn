@@ -23,4 +23,8 @@ console.log(arr1,arr2);
 console.log([1,2,3].includes(2));
 console.log(typeof Array.prototype.includes === 'function')
 const ar3 = [1,2,3,5];
+const k = 44;
+const m = 66;
 console.log(ar3.entries())
+console.log(typeof process.env.NODE_ENV );
+console.log('NODE_ENV:' + process.env.NODE_ENV );
