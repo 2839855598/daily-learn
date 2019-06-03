@@ -22,7 +22,9 @@ module.exports = {
         path: path.resolve(__dirname,'dist'),
         // 多个entry，文件名不能写死，会冲突
         // hash与chunkhash区别，chunkhash为chunk唯一性，hash为每次打包统一名字
-        filename:  './js/[name]-[chunkhash:8].js'
+        filename:  './js/[name]-[chunkhash:8].js',
+        // 线上时候
+        // publicPath: "http://cdn.example.com/[hash]/"
     },
     module: {
         rules: [
@@ -43,7 +45,6 @@ module.exports = {
                            // 不指定,则从css目录下查找图片，查找不到的，报错
                            // 线上时候可以指定cdn地址
                            publicPath: '../'
-
 
                       }
                     },
@@ -90,7 +91,8 @@ module.exports = {
 
                     }
                 }
-            }
+            },
+
         ]
     },
     plugins: [
