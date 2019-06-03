@@ -1,5 +1,6 @@
-import "../css/main.css";
-
+import "../css/main.css"
+// 字体样式
+import "../css/font-awesome.css"
 const a = 22;
 const are = () => {
     console.log('2333');

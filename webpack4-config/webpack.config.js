@@ -15,7 +15,7 @@ console.log(devMode)
 module.exports = {
     // production 生产模式，development开发模式
     entry: {
-      "main": "./src/js/index",
+      "main": "./src/js/main",
         "a": "./src/js/a"
     },
     output: {
@@ -92,7 +92,18 @@ module.exports = {
                     }
                 }
             },
-
+            {
+                test: /\.(eot|woff2?|ttf|svg)$/i,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        name: "[name]-[hash:5].[ext]",
+                        // 小于5k用base64，大于5k字体图标
+                        limit: 5000,
+                        outputPath: 'fonts/'
+                    }
+                }
+            }
         ]
     },
     plugins: [
@@ -132,10 +143,10 @@ module.exports = {
         new CleanWebpackPlugin(),
         // 提取css为单独文件
         new MiniCssExtractPlugin({
-            // 这里的/指的是 dist输出目录
             filename:  'css/[name].[hash:8].css'  ,
             chunkFilename:  'css/[id].[hash:8].css'
         })
+
     ]
 
 }
