@@ -2,8 +2,21 @@
     margin: 0;
     padding: 0;
 }
+
+
 .box {
     width: 100px;
     height: 100px;
     background: yellow;
+    display: flex;
+    transform: translateX(200px);
+
+}
+
+.footer {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+    background: url("../images/1.jpg") no-repeat;
+    background-size: cover;
 }

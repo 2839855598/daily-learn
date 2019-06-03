@@ -39,15 +39,57 @@ module.exports = {
                     {
                       loader:  MiniCssExtractPlugin.loader,
                       options: {
-                          // publicPath: ,
+                           // 指定css中图片的路径从上一层查找，即dist目录下，
+                           // 不指定,则从css目录下查找图片，查找不到的，报错
+                           // 线上时候可以指定cdn地址
+                           publicPath: '../'
 
 
                       }
                     },
-                    'css-loader',
-                    'postcss-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            // 表示当前loader之后 2个loader来处理 import的css
+                            importLoaders: 2,
+                            // 可以查看到源代码
+                            sourceMap: true
+                        }
+
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            ident: 'postcss',
+                            plugins: (loader) => [
+                                // 处理@import规则的文件，比如@import 'a.css'
+                                require('postcss-import')(),
+                                // postcss-preset-env包含 autoprefixer
+                                require('postcss-preset-env')({
+
+                                    browsers: ['> 1%', 'last 2 versions', 'not ie <=8']
+
+                                }),
+                                // 是否压缩css代码
+                                 devMode ? function(){} : require('cssnano')()
+                            ]
+                        }
+                    },
                     'sass-loader'
                 ]
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        // 小于8k转为base64，大于8k，用file-loader处理
+                        limit: 8192,
+                        // 文件输出的位置
+                        name: 'images/[name].[hash:7].[ext]'
+
+                    }
+                }
             }
         ]
     },

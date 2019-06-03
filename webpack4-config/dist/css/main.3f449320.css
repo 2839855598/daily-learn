@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+.box {
+  width: 100px;
+  height: 100px;
+  background: yellow;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transform: translateX(200px);
+          transform: translateX(200px); }
+
+.footer {
+  width: 100px;
+  height: 100px;
+  margin: 20px auto;
+  background: url(../images/1.93da500.jpg) no-repeat;
+  background-size: cover; }
+
