@@ -30,3 +30,16 @@
     width: 100%;
     height: 100%;
 }
+
+.slide {
+    width: 10px;
+    height: 20px;
+    background: blue;
+}
+
+.btn {
+    color: #000;
+}
+.btn:hover {
+    color: red;
+}

@@ -133,15 +133,6 @@ module.exports = {
                     }
                 }
             }
-        /*    {
-                test: path.resolve(__dirname, 'src/js/main.js'),
-                use: {
-                    loader: 'imports-loader',
-                    options: {
-                        $: 'jquery'
-                    }
-                }
-            }*/
         ]
     },
     plugins: [
@@ -205,11 +196,11 @@ module.exports = {
                 // 从上到下方式合成
                 algorithm: 'top-down'
             }
-        }),
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            _: 'lodash'
         })
+        // new webpack.ProvidePlugin({
+        //     $: 'jquery',
+        //     _: 'lodash'
+        // })
     ]
 
 }

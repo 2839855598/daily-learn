@@ -3,13 +3,16 @@ import "../css/main.css"
 import "../css/font-awesome.css"
 import "../css/base.css"
 
+// import $ from 'jquery';
+import { map } from 'lodash-es';
+
+// $('#btn').on('click',() => {
+//     alert(1);
+// })
 
 
-$('#btn').on('click',() => {
-    alert(1);
-})
 
-const ar1 = _.map([1,2,3], (val)=> val+1 );
+const ar1 = map([1,2,3], (val)=> val+1 );
 console.log(ar1);
 const a = 22;
 const are = () => {
@@ -34,8 +37,3 @@ console.log(arr1,arr2);
 console.log([1,2,3].includes(2));
 console.log(typeof Array.prototype.includes === 'function')
 const ar3 = [1,2,3,5];
-const k = 44;
-const m = 66;
-console.log(ar3.entries())
-console.log(typeof process.env.NODE_ENV );
-console.log('NODE_ENV:' + process.env.NODE_ENV );
