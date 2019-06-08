@@ -7,6 +7,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 // 提取css到单独文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// css tree-shaking
+const PurifyCss = require('purifycss-webpack');
+// 处理css-tree-shaking 路径问题
+const glob = require('glob-all');
 // 合成雪碧图
 const Spritesmith = require('webpack-spritesmith');
 // 是否开发模式
@@ -196,11 +200,19 @@ module.exports = {
                 // 从上到下方式合成
                 algorithm: 'top-down'
             }
+        }),
+        // 第三方库设为全局变量
+        /*new webpack.ProvidePlugin({
+            $: 'jquery',
+            _: 'lodash'
+        })*/
+        new PurifyCss({
+            paths: glob.sync([
+                // 同样对html需要 css-tree-shaking
+                path.resolve(__dirname, "./src/*.html"),
+                path.resolve(__dirname, "./src/js/*.js")
+            ])
         })
-        // new webpack.ProvidePlugin({
-        //     $: 'jquery',
-        //     _: 'lodash'
-        // })
     ]
 
 }
