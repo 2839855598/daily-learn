@@ -8,6 +8,9 @@ import "../css/base.css"
 $('#btn').on('click',() => {
     alert(1);
 })
+
+const ar1 = _.map([1,2,3], (val)=> val+1 );
+console.log(ar1);
 const a = 22;
 const are = () => {
     console.log('2333');
