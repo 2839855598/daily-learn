@@ -7,6 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 // 提取css到单独文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// 合成雪碧图
+const Spritesmith = require('webpack-spritesmith');
 // 是否开发模式
 const devMode = process.env.NODE_ENV === 'dev' ;
 
@@ -91,8 +93,8 @@ module.exports = {
                             name: 'images/[name].[hash:7].[ext]'
 
                         }
-                    },
-                    {
+                    }
+                  /*  {
                         loader: 'image-webpack-loader',
                         options: {
                             mozjpeg: {
@@ -115,7 +117,7 @@ module.exports = {
                                 quality: 75
                             }
                         }
-                    }
+                    }*/
                 ]
 
             },
@@ -167,13 +169,35 @@ module.exports = {
             favicon: ''
         }),
         // 清除旧的output，生成新的output
-        new CleanWebpackPlugin(),
+        // new CleanWebpackPlugin(),
         // 提取css为单独文件
         new MiniCssExtractPlugin({
             filename:  'css/[name].[hash:8].css'  ,
             chunkFilename:  'css/[id].[hash:8].css'
+        }),
+        // 生成雪碧图
+        // 跟CleanWebpackPlugin冲突
+        new Spritesmith({
+            // 要合并的图片源路径
+            src: {
+                cwd: path.resolve(__dirname, 'src/images'),
+                glob: '*.png'
+            },
+            // 合并图片的目标路径
+            target: {
+                image: path.resolve(__dirname, 'dist/sprites/sprite.png'),
+                css: path.resolve(__dirname, 'dist/sprites/sprite.css')
+            },
+            // 引用雪碧图的路径写法
+            apiOptions: {
+                cssImageRef: '../sprites/sprite.png'
+            },
+            // 雪碧图合并规则
+            spritesmithOptions: {
+                // 从上到下方式合成
+                algorithm: 'top-down'
+            }
         })
-
     ]
 
 }

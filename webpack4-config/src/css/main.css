@@ -10,7 +10,7 @@
     background: yellow;
     display: flex;
     transform: translateX(200px);
-
+    background: url("../images/psb.jpg") no-repeat;
 }
 
 .footer {
