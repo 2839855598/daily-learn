@@ -2,6 +2,12 @@ import "../css/main.css"
 // 字体样式
 import "../css/font-awesome.css"
 import "../css/base.css"
+
+
+
+$('#btn').on('click',() => {
+    alert(1);
+})
 const a = 22;
 const are = () => {
     console.log('2333');
