@@ -175,8 +175,7 @@ module.exports = {
             filename:  'css/[name].[hash:8].css'  ,
             chunkFilename:  'css/[id].[hash:8].css'
         }),
-        // 生成雪碧图
-        // 跟CleanWebpackPlugin冲突
+        // 生成雪碧图,跟CleanWebpackPlugin冲突
         new Spritesmith({
             // 要合并的图片源路径
             src: {
