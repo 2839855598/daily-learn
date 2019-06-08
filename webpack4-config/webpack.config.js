@@ -132,6 +132,15 @@ module.exports = {
                         outputPath: 'fonts/'
                     }
                 }
+            },
+            {
+                test: path.resolve(__dirname, 'src/js/main.js'),
+                use: {
+                    loader: 'imports-loader',
+                    options: {
+                        $: 'jquery'
+                    }
+                }
             }
         ]
     },
@@ -197,6 +206,9 @@ module.exports = {
                 algorithm: 'top-down'
             }
         })
+        // new webpack.ProvidePlugin({
+        //     $: 'jquery'
+        // })
     ]
 
 }
