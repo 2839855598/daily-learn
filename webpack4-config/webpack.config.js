@@ -159,7 +159,7 @@ module.exports = {
             // 模板来源必须写，不写的话，body内容会被清除，只保留js
             template: "./src/demo.html",
             // 当前HTML需要加载哪些js文件，同理excludeChunks不需要加载哪些js
-            chunks: ["main"],
+            chunks: ["main", 'es6-demand', 'mainfest', 'vendors~main'],
             // 优化html
             minify: {
                 // 移出HMTL中的注释
@@ -217,7 +217,7 @@ module.exports = {
     optimization: {
         // 如果修改入口文件的逻辑代码，防止第三方库打包名字也变化,
         runtimeChunk: {
-            "name": "manifest"
+            "name": "mainfest"
         },
         splitChunks: {
             // 包括同步的和异步的（即import和import()两种方式）
@@ -225,6 +225,7 @@ module.exports = {
             cacheGroups: {
                 // 异步加载的公共代码
                 common: {
+                    // chunkName，在htmlPlugin中chunks能用到
                     name: 'async-common',
                     chunks: 'async',
                     minChunks: 2,
@@ -240,6 +241,7 @@ module.exports = {
                     chunks: 'initial',
                     priority: 0
                 }
+
             }
         }
 
