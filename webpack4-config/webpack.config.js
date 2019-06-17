@@ -21,8 +21,8 @@ console.log(devMode)
 module.exports = {
     // production 生产模式，development开发模式
     entry: {
-      "main": "./src/js/main",
-        "a": "./src/js/a"
+        "main": "./src/js/main"
+        // "index": "./src/js/index"
     },
     output: {
         path: path.resolve(__dirname,'dist'),
@@ -202,10 +202,10 @@ module.exports = {
             }
         }),
         // 第三方库设为全局变量
-        /*new webpack.ProvidePlugin({
+       /* new webpack.ProvidePlugin({
             $: 'jquery',
             _: 'lodash'
-        })*/
+        }),*/
         new PurifyCss({
             paths: glob.sync([
                 // 同样对html需要 css-tree-shaking
@@ -213,6 +213,38 @@ module.exports = {
                 path.resolve(__dirname, "./src/js/*.js")
             ])
         })
-    ]
+    ],
+    optimization: {
+        // 如果修改入口文件的逻辑代码，防止第三方库打包名字也变化,
+        runtimeChunk: {
+            "name": "manifest"
+        },
+        splitChunks: {
+            // 包括同步的和异步的（即import和import()两种方式）
+            chunks: 'all',
+            cacheGroups: {
+                // 异步加载的公共代码
+                common: {
+                    name: 'async-common',
+                    chunks: 'async',
+                    minChunks: 2,
+                    priority: 10,
+                    // 此代码是否可复用，再次遇到就不必打包
+                    reuseExistingChunk: true,
+                    // 强制生成
+                    enforce: true
+                },
+                es6: {
+                    name: 'es6-demand',
+                    test:  /[\\/]node_modules[\\/]core-js[\\/]/,
+                    chunks: 'initial',
+                    priority: 0
+                }
+            }
+        }
+
+
+    }
+
 
 }

@@ -3,26 +3,46 @@ import "../css/main.css"
 import "../css/font-awesome.css"
 import "../css/base.css"
 
-// import $ from 'jquery';
-import { map } from 'lodash-es';
-
-// $('#btn').on('click',() => {
-//     alert(1);
-// })
+import * as math from 'mathjs';
 
 
 
-const ar1 = map([1,2,3], (val)=> val+1 );
-console.log(ar1);
-const a = 22;
+console.log('666')
+console.log(math.add(math.sqrt(4),2));
+
+
+
+
+
+var bt1 = document.querySelector('.btn');
+// 异步按需加载，点击按钮才会加载lodash
+bt1.addEventListener('click', function(){
+    import(/*webpackChunkName:'async-lodash'*/'lodash').then((lodash)=> {
+        console.log('this is lodash');
+    })
+
+});
+// 异步加载, 页面自动加载，加载完自动执行
+import(/* webpackChunkName: 'async-b'*/'./b.js').then((b) => {
+    console.log('this is b');
+    console.log(b)
+})
+
+// 异步加载, 页面自动加载，加载完自动执行
+import(/* webpackChunkName: 'async-index'*/'./index.js').then((index) => {
+    console.log('this is index');
+    console.log(index)
+})
+
 const are = () => {
     console.log('2333');
 }
 are();
 
 
+
 const s1 = new Set();
-let  val = '234556';
+
 let p = new Promise(function(resolve, reject){
     //做一些异步操作
     setTimeout(function(){
@@ -35,5 +55,7 @@ const arr2 = [1,2,4].map(val => val+1);
 
 console.log(arr1,arr2);
 console.log([1,2,3].includes(2));
-console.log(typeof Array.prototype.includes === 'function')
-const ar3 = [1,2,3,5];
+
+
+const ar4 = [1,2,4];
+const m5 = new Map();
