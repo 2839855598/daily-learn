@@ -21,8 +21,8 @@ console.log(devMode)
 module.exports = {
     // production 生产模式，development开发模式
     entry: {
-        "main": "./src/js/main"
-        // "index": "./src/js/index"
+        "main": "./src/js/main",
+        "index": "./src/js/index"
     },
     output: {
         path: path.resolve(__dirname,'dist'),
@@ -159,7 +159,32 @@ module.exports = {
             // 模板来源必须写，不写的话，body内容会被清除，只保留js
             template: "./src/demo.html",
             // 当前HTML需要加载哪些js文件，同理excludeChunks不需要加载哪些js
-            chunks: ["main", 'es6-demand', 'mainfest', 'vendors~main'],
+            chunks: ["main","mainfest", "vendors","initial-common",'es6-demand'],
+            // 优化html
+            minify: {
+                // 移出HMTL中的注释
+                removeComments: devMode ? false : true,
+                // 删除空白符和换行符
+                collapseWhitespace: devMode ? false : true,
+                // 压缩内联css
+                minifyCSS: devMode ? false : true
+            },
+            // 指定页面图标
+            favicon: ''
+        }),
+        new HtmlWebpackPlugin({
+            // 在模板中这个不管用，要在模板title中输入<%= htmlWebpackPlugin.options.title %>
+            title: "webpack-config2",
+            // js插入到body后面
+            inject: 'body',
+            // 为js，css添加hash，也算是缓存，一旦文件改变了，hash就变，浏览器就重新请求
+            // 该文件，如果hash不变，浏览器直接从缓存中获取文件
+            hash: devMode ? false : true,
+            filename: 'index2.html',
+            // 模板来源必须写，不写的话，body内容会被清除，只保留js
+            template: "./src/demo2.html",
+            // 当前HTML需要加载哪些js文件，同理excludeChunks不需要加载哪些js
+            chunks: ["index","mainfest", "vendors","initial-common",'es6-demand'],
             // 优化html
             minify: {
                 // 移出HMTL中的注释
@@ -176,7 +201,7 @@ module.exports = {
         // new CleanWebpackPlugin(),
         // 提取css为单独文件
         new MiniCssExtractPlugin({
-            filename:  'css/[name].[hash:8].css'  ,
+            filename:  'css/[name].[hash:8].css',
             chunkFilename:  'css/[id].[hash:8].css'
         }),
         // 生成雪碧图,跟CleanWebpackPlugin冲突
@@ -223,23 +248,30 @@ module.exports = {
             // 包括同步的和异步的（即import和import()两种方式）
             chunks: 'all',
             cacheGroups: {
-                // 异步加载的公共代码
+                // 提取node_modules的es6按需加载模块
+                es6: {
+                    name: 'es6-demand',
+                    test:  /[\\/]node_modules[\\/]core-js[\\/]/,
+                    chunks: 'initial',
+                    priority: 30
+                },
+                vendor: {
+                    name: 'vendors',
+                    test:  /[\\/]node_modules[\\/]/,
+                    chunks: 'initial',
+                    priority: 20
+                },
+                // 同步加载的公共代码
                 common: {
                     // chunkName，在htmlPlugin中chunks能用到
-                    name: 'async-common',
-                    chunks: 'async',
+                    name: 'initial-common',
+                    chunks: 'initial',
                     minChunks: 2,
                     priority: 10,
                     // 此代码是否可复用，再次遇到就不必打包
                     reuseExistingChunk: true,
                     // 强制生成
                     enforce: true
-                },
-                es6: {
-                    name: 'es6-demand',
-                    test:  /[\\/]node_modules[\\/]core-js[\\/]/,
-                    chunks: 'initial',
-                    priority: 0
                 }
 
             }

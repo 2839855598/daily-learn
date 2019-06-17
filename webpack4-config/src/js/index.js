@@ -1,13 +1,22 @@
-// import _  from "lodash";
-// const result = _.map([1,2,34],(val) => val+1 );
+import "../css/main.css"
+// 字体样式
+import "../css/font-awesome.css"
+import "../css/base.css"
+
 
 import './common.js';
 
-// webpackPrefetch待首屏核心代码加载完成后，自动加载m.js,
-// 防止按需加载(比如点击按钮加载) 时候，m.js文件太大，导致loading或者空白，
-// 所以需要在加载完首屏核心代码后，再去加载这个文件。
-import(/* webpackChunkName: "async-m", webpackPrefetch: true */'./m.js').then((m)=> {
-    console.log('m is loaded');
+import './m.js';
+
+import $ from 'jquery';
+
+// 动态加载b.js
+import(/*webpackChunkName:'async-b'*/'./b.js').then((b)=> {
+    console.log('this is b');
+})
+
+$('#btn').on('click', () => {
+    alert('this is index');
 })
 
 const arr = [1,2,3];

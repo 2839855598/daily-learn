@@ -6,8 +6,8 @@ import "../css/base.css"
 import * as math from 'mathjs';
 
 
+import './common.js';
 
-console.log('666')
 console.log(math.add(math.sqrt(4),2));
 
 
@@ -22,17 +22,12 @@ bt1.addEventListener('click', function(){
     })
 
 });
-// 异步加载, 页面自动加载，加载完自动执行
-import(/* webpackChunkName: 'async-b'*/'./b.js').then((b) => {
+
+// 动态加载b.js
+import(/*webpackChunkName:'async-b'*/'./b.js').then((b)=> {
     console.log('this is b');
-    console.log(b)
 })
 
-// 异步加载, 页面自动加载，加载完自动执行
-import(/* webpackChunkName: 'async-index'*/'./index.js').then((index) => {
-    console.log('this is index');
-    console.log(index)
-})
 
 const are = () => {
     console.log('2333');
