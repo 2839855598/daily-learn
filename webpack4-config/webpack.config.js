@@ -13,6 +13,9 @@ const PurifyCss = require('purifycss-webpack');
 const glob = require('glob-all');
 // 合成雪碧图
 const Spritesmith = require('webpack-spritesmith');
+// 模块依赖分析图
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 // 是否开发模式
 const devMode = process.env.NODE_ENV === 'dev' ;
 
@@ -237,7 +240,9 @@ module.exports = {
                 path.resolve(__dirname, "./src/*.html"),
                 path.resolve(__dirname, "./src/js/*.js")
             ])
-        })
+        }),
+        // 模块依赖分析图
+        new BundleAnalyzerPlugin()
     ],
     optimization: {
         // 如果修改入口文件的逻辑代码，防止第三方库打包名字也变化,
