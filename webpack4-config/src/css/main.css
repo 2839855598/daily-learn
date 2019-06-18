@@ -6,12 +6,16 @@
 body {
     margin: 0;
     padding: 0;
+    background: white;
+
 }
 
 .box {
-    width: 100px;
-    height: 100px;
-    background: yellow;
+    width: 80px;
+    height: 80px;
+    background: blue;
+    color: red;
+    font-size: 44px;
     display: flex;
     transform: translateX(200px);
     background: url("../images/psb.jpg") no-repeat;

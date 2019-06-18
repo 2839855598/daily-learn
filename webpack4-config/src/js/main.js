@@ -1,12 +1,15 @@
 import "../css/main.css"
 // 字体样式
 import "../css/font-awesome.css"
+
 import "../css/base.css"
 
 import * as math from 'mathjs';
 
 
 import './common.js';
+
+
 
 console.log(math.add(math.sqrt(4),2));
 
@@ -30,7 +33,7 @@ import(/*webpackChunkName:'async-b'*/'./b.js').then((b)=> {
 
 
 const are = () => {
-    console.log('2333');
+    console.log('2333600999');
 }
 are();
 

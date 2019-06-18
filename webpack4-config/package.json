@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NODE_ENV=dev webpack --config webpack.config.js  --mode development ",
-    "server": "cross-env NODE_ENV=pro webpack --config webpack.config.js --mode production  ",
+    "start": "cross-env NODE_ENV=dev webpack-dev-server --config webpack.config.js  --mode development ",
+    "build": "cross-env NODE_ENV=pro webpack --config webpack.config.js --mode production  ",
     "babel": "./node_modules/.bin/babel ./src/js/index.js --out-file ./src/js/build.js "
   },
   "keywords": [],
@@ -50,6 +50,7 @@
     "webpack": "^4.32.2",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.7.1",
     "webpack-spritesmith": "^1.0.1"
   },
   "dependencies": {}

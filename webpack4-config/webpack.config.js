@@ -31,9 +31,32 @@ module.exports = {
         path: path.resolve(__dirname,'dist'),
         // 多个entry，文件名不能写死，会冲突
         // hash与chunkhash区别，chunkhash为chunk唯一性，hash为每次打包统一名字
-        filename:  './js/[name]-[chunkhash:8].js',
+        filename:  './js/[name]-[hash:8].js',
         // 线上时候
         // publicPath: "http://cdn.example.com/[hash]/"
+
+    },
+    // 开启调试
+    devtool: "source-map",
+    // 开发服务器
+    devServer: {
+        // 告诉服务器从哪提供内容，只有在想要提供静态文件时才需要
+        contentBase: path.join(__dirname, 'dist'),
+        // 一切服务都启用gzip压缩
+        compress: true,
+        // 默认localhost
+        host: 'localhost',
+        // 端口号
+        port: '8082',
+        // 热更新
+        // hot: true,
+        // inline: true,
+        // 自动打开浏览器
+        open: true,
+        // 如果代码出错，会在浏览器页面弹出“浮动层”。类似于 vue-cli 等脚手架
+        overlay: true,
+        // 404时候，返回到index.html
+        historyApiFallback: true
     },
     module: {
         rules: [
@@ -204,8 +227,8 @@ module.exports = {
         // new CleanWebpackPlugin(),
         // 提取css为单独文件
         new MiniCssExtractPlugin({
-            filename:  'css/[name].[hash:8].css',
-            chunkFilename:  'css/[id].[hash:8].css'
+            filename:  'css/[name].[hash:8].css'
+            // chunkFilename:  'css/[id].[hash:8].css'
         }),
         // 生成雪碧图,跟CleanWebpackPlugin冲突
         new Spritesmith({
@@ -243,6 +266,8 @@ module.exports = {
         }),
         // 模块依赖分析图
         new BundleAnalyzerPlugin()
+
+
     ],
     optimization: {
         // 如果修改入口文件的逻辑代码，防止第三方库打包名字也变化,

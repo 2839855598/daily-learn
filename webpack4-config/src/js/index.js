@@ -1,8 +1,3 @@
-import "../css/main.css"
-// 字体样式
-import "../css/font-awesome.css"
-import "../css/base.css"
-
 
 import './common.js';
 
