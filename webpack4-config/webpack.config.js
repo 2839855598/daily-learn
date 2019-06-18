@@ -56,7 +56,18 @@ module.exports = {
         // 如果代码出错，会在浏览器页面弹出“浮动层”。类似于 vue-cli 等脚手架
         overlay: true,
         // 404时候，返回到index.html
-        historyApiFallback: true
+        historyApiFallback: true,
+        proxy: {
+            '/aj/account/watermark': {
+                target: "https://weibo.com",
+                changeOrigin: true,
+                logLevel: "debug",
+                headers: {
+                    Cookie: ""
+                }
+            }
+
+        }
     },
     module: {
         rules: [
