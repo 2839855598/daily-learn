@@ -1,4 +1,6 @@
+
 import "../css/main.css"
+import "../css/a.scss";
 // 字体样式
 import "../css/font-awesome.css"
 
@@ -9,7 +11,12 @@ import * as math from 'mathjs';
 
 import './common.js';
 
+import axios from 'axios';
 
+axios.get('/mock/5c03dec03b23d255f07eca44/example/comments')
+    .then((res) =>  {
+        console.log(res);
+    })
 
 console.log(math.add(math.sqrt(4),2));
 

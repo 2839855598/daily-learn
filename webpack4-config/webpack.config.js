@@ -57,9 +57,11 @@ module.exports = {
         overlay: true,
         // 404时候，返回到index.html
         historyApiFallback: true,
+        // 可以使用 easymock模拟数据接口
         proxy: {
-            '/aj/account/watermark': {
-                target: "https://weibo.com",
+            '/mock/5c03dec03b23d255f07eca44/example/comments': {
+                target: "https://www.easy-mock.com",
+                secure: false,
                 changeOrigin: true,
                 logLevel: "debug",
                 headers: {
@@ -195,8 +197,8 @@ module.exports = {
             filename: 'index.html',
             // 模板来源必须写，不写的话，body内容会被清除，只保留js
             template: "./src/demo.html",
-            // 当前HTML需要加载哪些js文件，同理excludeChunks不需要加载哪些js
-            chunks: ["main","mainfest", "vendors","initial-common",'es6-demand'],
+            // 当前HTML需要加载哪些js/css文件，同理excludeChunks不需要加载哪些js/css
+            chunks: ["main","mainfest", "vendors","initial-common",'es6-demand','scss'],
             // 优化html
             minify: {
                 // 移出HMTL中的注释
@@ -313,8 +315,14 @@ module.exports = {
                     reuseExistingChunk: true,
                     // 强制生成
                     enforce: true
-                }
-
+                },
+                // 也可以拆分css文件
+               scss: {
+                    test: /\.scss$/,
+                    name: 'scss',
+                    chunks: 'initial',
+                    enforce: true
+               }
             }
         }
 
