@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/js/b.js"],"names":["console","log","__webpack_exports__"],"mappings":"0FAAAA,eAAQC,IAAI,WAEGC,EAAA","file":"./js/async-b-c106c98e.js","sourcesContent":["console.log('sdfsfds');\r\n\r\nexport default 'b.js';"],"sourceRoot":""}

@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{150:function(n,o,i){"use strict";i.r(o);i(72);console.log("this is m"),i.e(5).then(i.bind(null,87)).then(function(n){console.log("c is loaded")});var t=i(90),e=i.n(t);i.e(4).then(i.bind(null,152)).then(function(n){console.log("this is b")}),e()("#btn").on("click",function(){alert("this is index")});[1,2,3].map(function(n){return n+2})}},[[150,2,0,3,1]],[5]]);
+//# sourceMappingURL=index-189c8bd7.js.map

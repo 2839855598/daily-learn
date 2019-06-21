@@ -1,1 +1,0 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"],[],[["./src/js/main.js","mainfest","vendor"]]]);

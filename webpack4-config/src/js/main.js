@@ -13,6 +13,10 @@ import './common.js';
 
 import axios from 'axios';
 
+import {add} from './k';
+
+console.log(add(1,2));
+
 axios.get('/mock/5c03dec03b23d255f07eca44/example/comments')
     .then((res) =>  {
         console.log(res);

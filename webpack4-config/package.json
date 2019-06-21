@@ -2,12 +2,14 @@
   "name": "webpack-demo-js",
   "version": "1.0.0",
   "description": "",
+  "sideEffects": ["*.(sc|c)ss"],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=dev webpack-dev-server --config webpack.config.js  --mode development ",
+    "start": "cross-env NODE_ENV=dev webpack --config webpack.config.js  --mode development ",
     "build": "cross-env NODE_ENV=pro webpack --config webpack.config.js --mode production  ",
-    "babel": "./node_modules/.bin/babel ./src/js/index.js --out-file ./src/js/build.js "
+    "babel": "./node_modules/.bin/babel ./src/js/index.js --out-file ./src/js/build.js ",
+    "server": "webpack-dev-server --open"
   },
   "keywords": [],
   "author": "",

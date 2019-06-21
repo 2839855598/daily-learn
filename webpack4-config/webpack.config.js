@@ -37,7 +37,7 @@ module.exports = {
 
     },
     // 开启调试
-    devtool: "source-map",
+    // devtool: "source-map",
     // 开发服务器
     devServer: {
         // 告诉服务器从哪提供内容，只有在想要提供静态文件时才需要

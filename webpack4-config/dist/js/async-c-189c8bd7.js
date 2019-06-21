@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{87:function(n,t,u){"use strict";u.r(t),u.d(t,"add",function(){return o}),u.d(t,"minus",function(){return c}),console.log("this is c");var o=function(n,t){return n+t},c=function(n,t){return n-t};t.default="c.js"}}]);
+//# sourceMappingURL=async-c-189c8bd7.js.map

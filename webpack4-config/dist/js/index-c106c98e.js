@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{122:function(n,i,t){"use strict";t.r(i);var o=t(71),c=t.n(o);t.e(2).then(t.bind(null,124)).then(function(n){console.log("this is b")}),c()("#btn").on("click",function(){alert("this is index")});[1,2,3].map(function(n){return n+2})}},[[122,0,1]]]);
