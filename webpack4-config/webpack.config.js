@@ -27,6 +27,7 @@ module.exports = {
         "main": "./src/js/main",
         "index": "./src/js/index"
     },
+    performance: false,
     output: {
         path: path.resolve(__dirname,'dist'),
         // 多个entry，文件名不能写死，会冲突
