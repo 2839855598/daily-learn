@@ -32,7 +32,8 @@ module.exports = {
         path: path.resolve(__dirname,'dist'),
         // 多个entry，文件名不能写死，会冲突
         // hash与chunkhash区别，chunkhash为chunk唯一性，hash为每次打包统一名字
-        filename:  './js/[name]-[hash:8].js',
+        filename:  './js/[name]-[chunkhash:8].js',
+        // chunkFilename: './js/[name]-[contenthash:8].js'
         // 线上时候
         // publicPath: "http://cdn.example.com/[hash]/"
 
@@ -134,7 +135,7 @@ module.exports = {
                             // 小于8k转为base64，大于8k，用file-loader处理
                             limit: 8192,
                             // 文件输出的位置
-                            name: 'images/[name].[hash:7].[ext]'
+                            name: 'images/[name].[hash:5].[ext]'
 
                         }
                     }
@@ -199,7 +200,7 @@ module.exports = {
             // 模板来源必须写，不写的话，body内容会被清除，只保留js
             template: "./src/demo.html",
             // 当前HTML需要加载哪些js/css文件，同理excludeChunks不需要加载哪些js/css
-            chunks: ["main","mainfest", "vendors","initial-common",'es6-demand','scss'],
+            chunks: ["main","mainfest", "vendors","initial-common",'es6-demand'],
             // 优化html
             minify: {
                 // 移出HMTL中的注释
@@ -241,7 +242,7 @@ module.exports = {
         // new CleanWebpackPlugin(),
         // 提取css为单独文件
         new MiniCssExtractPlugin({
-            filename:  'css/[name].[hash:8].css'
+            filename:  'css/[name].[contenthash:8].css'
             // chunkFilename:  'css/[id].[hash:8].css'
         }),
         // 生成雪碧图,跟CleanWebpackPlugin冲突
@@ -318,12 +319,12 @@ module.exports = {
                     enforce: true
                 },
                 // 也可以拆分css文件
-               scss: {
-                    test: /\.scss$/,
-                    name: 'scss',
-                    chunks: 'initial',
-                    enforce: true
-               }
+               // scss: {
+               //      test: /\.scss$/,
+               //      name: 'scss.',
+               //      chunks: 'initial',
+               //      enforce: true
+               // }
             }
         }
 

@@ -66,5 +66,5 @@ console.log(arr1,arr2);
 console.log([1,2,3].includes(2));
 
 
-const ar4 = [1,2,4];
+
 const m5 = new Map();
