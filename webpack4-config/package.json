@@ -60,6 +60,7 @@
     "webpack-spritesmith": "^1.0.1"
   },
   "dependencies": {
-    "babel-eslint": "^8.2.6"
+    "babel-eslint": "^8.2.6",
+    "package-name": "^0.1.0"
   }
 }
