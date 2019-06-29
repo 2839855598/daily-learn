@@ -5,6 +5,6 @@ console.log('this is m');
 // 所以需要在加载完首屏核心代码后，再去加载这个文件。
 import(/* webpackChunkName: "async-c", webpackPrefetch: true */'./c.js').then((c)=> {
     console.log('c is loaded');
-})
+});
 
 export default 'm.js';

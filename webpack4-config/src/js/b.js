@@ -1,3 +1,3 @@
 console.log('sdfsfds');
 
-export default 'b.js';
+export default 'b';
